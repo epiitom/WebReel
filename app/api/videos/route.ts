@@ -66,5 +66,5 @@ export async function POST(request: NextRequest) {
       { error: "Failed to create video" },
       { status: 500 }
     );
-  }
+  }  
 }
