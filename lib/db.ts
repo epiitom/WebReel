@@ -19,11 +19,11 @@ export async function connectToDatabase() {
     return cached.conn;
   }
 
-  if (!cached.promise) {
+ if (!cached.promise) {
     const opts = {
       bufferCommands: true,
       maxPoolSize: 10,
-    };
+    }; 
 
     cached.promise = mongoose
       .connect(MONGODB_URI, opts)

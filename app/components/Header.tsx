@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { Home, User } from "lucide-react";
+import { Home, User, Film, LogOut, LogIn } from "lucide-react";
 import { useNotification } from "./Notification";
 
 export default function Header() {
@@ -19,83 +19,75 @@ export default function Header() {
   };
 
   return (
-    <div className="navbar bg-base-300 sticky top-0 z-40">
-      <div className="container mx-auto">
-        <div className="flex-1 px-2 lg:flex-none">
+    <header className="sticky top-0 z-40 bg-gradient-to-r from-blue-900 to-purple-900 text-white shadow-lg">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo and brand name */}
           <Link
             href="/"
-            className="btn btn-ghost text-xl gap-2 normal-case font-bold"
+            className="flex items-center gap-2 font-bold text-xl transition-all duration-200 hover:scale-105"
             prefetch={true}
-            onClick={() =>
-              showNotification("Welcome to ImageKit ReelsPro", "info")
-            }
+            onClick={() => showNotification("Welcome to ImageKit ReelsPro", "info")}
           >
-            <Home className="w-5 h-5" />
-            ImageKit ReelsPro
+            <div className="bg-white text-blue-900 p-2 rounded-full">
+              <Home className="w-5 h-5" />
+            </div>
+            <span className="hidden sm:inline"> ReelsPro</span>
           </Link>
-        </div>
-        <div className="flex flex-1 justify-end px-2">
-          <div className="flex items-stretch gap-2">
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle"
-              >
-                <User className="w-5 h-5" />
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] shadow-lg bg-base-100 rounded-box w-64 mt-4 py-2"
-              >
+
+          {/* User menu */}
+          <div className="relative group">
+            <button
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
+            >
+              <User className="w-5 h-5" />
+              <span className="hidden md:inline">
+                {session ? session.user?.email?.split("@")[0] : "Account"}
+              </span>
+            </button>
+
+            {/* Dropdown menu */}
+            <div className="absolute right-0 mt-2 w-64 origin-top-right rounded-md bg-white text-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+              <div className="py-2">
                 {session ? (
                   <>
-                    <li className="px-4 py-1">
-                      <span className="text-sm opacity-70">
-                        {session.user?.email?.split("@")[0]}
-                      </span>
-                    </li>
-                    <div className="divider my-1"></div>
-
-                    <li>
-                      <Link
-                        href="/upload"
-                        className="px-4 py-2 hover:bg-base-200 block w-full"
-                        onClick={() =>
-                          showNotification("Welcome to Admin Dashboard", "info")
-                        }
-                      >
-                        Video Upload
-                      </Link>
-                    </li>
-
-                    <li>
-                      <button
-                        onClick={handleSignOut}
-                        className="px-4 py-2 text-error hover:bg-base-200 w-full text-left"
-                      >
-                        Sign Out
-                      </button>
-                    </li>
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <p className="text-sm text-gray-500">Signed in as</p>
+                      <p className="font-medium truncate">{session.user?.email}</p>
+                    </div>
+                    
+                    <Link
+                      href="/upload"
+                      className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-100 transition-colors duration-150"
+                      onClick={() => showNotification("Welcome to Admin Dashboard", "info")}
+                    >
+                      <Film className="w-4 h-4" />
+                      <span>Video Upload</span>
+                    </Link>
+                    
+                    <button
+                      onClick={handleSignOut}
+                      className="flex items-center gap-3 px-4 py-3 text-sm w-full text-left text-red-600 hover:bg-red-50 transition-colors duration-150"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
                   </>
                 ) : (
-                  <li>
-                    <Link
-                      href="/login"
-                      className="px-4 py-2 hover:bg-base-200 block w-full"
-                      onClick={() =>
-                        showNotification("Please sign in to continue", "info")
-                      }
-                    >
-                      Login
-                    </Link>
-                  </li>
+                  <Link
+                    href="/login"
+                    className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-100 transition-colors duration-150"
+                    onClick={() => showNotification("Please sign in to continue", "info")}
+                  >
+                    <LogIn className="w-4 h-4" />
+                    <span>Login</span>
+                  </Link>
                 )}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }

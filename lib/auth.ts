@@ -5,7 +5,7 @@ import { connectToDatabase } from "./db";
 import UserModel from "../models/User";
 
 export const authOptions: NextAuthOptions ={
-
+    
     providers : [
         CredentailsProvider({
             name: "Credentials",
