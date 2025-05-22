@@ -8,10 +8,26 @@ if (!MONGODB_URI) {
   );
 }
 
-let cached = global.mongoose;
+// Define cache type
+type MongooseCache = {
+  conn: typeof mongoose.connection | null;
+  promise: Promise<typeof mongoose.connection> | null;
+};
+
+// Extend the global namespace using interface
+declare global {
+  interface Global {
+    mongoose: MongooseCache;
+  }
+}
+
+// Use globalThis with proper typing
+declare const globalThis: Global;
+
+let cached = globalThis.mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = globalThis.mongoose = { conn: null, promise: null };
 }
 
 export async function connectToDatabase() {
@@ -19,7 +35,7 @@ export async function connectToDatabase() {
     return cached.conn;
   }
 
- if (!cached.promise) {
+  if (!cached.promise) {
     const opts = {
       bufferCommands: true,
       maxPoolSize: 10,
