@@ -22,13 +22,13 @@ const config: Config = {
     },
   },
   plugins: [
-    daisyui
+    // Correctly pass the daisyUI configuration object directly to the plugin
+    daisyui({
+      themes: ["dark"],
+      // other daisyUI config options can go here
+    }),
   ],
-  // If you need daisyUI config options, add them like this:
-  daisyui: {
-    themes: ["dark"],
-    // other daisyUI config options
-  } as any // Type assertion to bypass TypeScript checking
+  // Remove the standalone daisyui property from here, as it's now configured within the plugin
 }
 
 export default config
