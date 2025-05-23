@@ -20,7 +20,9 @@ export default withAuth(
         }
 
         // Public routes
-        if (pathname === "/" || pathname.startsWith("/api/videos")) {
+        if (pathname === "/" || pathname.startsWith("/api/videos")||
+        pathname.startsWith("/api/imagekit-auth") ||
+        pathname.startsWith("/upload")) {
           return true;
         }
         // All other routes require authentication
