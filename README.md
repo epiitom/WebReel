@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🎬 WebReel
+WebReel is a modern video-sharing platform that enables users to upload, share, and discover engaging video content. Built with the latest web technologies, WebReel offers a seamless and interactive experience for content creators and viewers alike.
 
-## Getting Started
 
-First, run the development server:
+🔗 Live Demo: web-reel-w7tg.vercel.app
 
-```bash
+🚀 Features
+User Authentication: Secure sign-up and login functionalities.
+
+Video Upload: Easily upload videos in various formats.
+
+Content Discovery: Explore trending and recent videos.
+
+User Engagement: Like, comment, and share videos.
+
+Responsive Design: Optimized for desktops, tablets, and mobile devices.
+
+🛠️ Tech Stack
+Frontend: Next.js with TypeScript
+
+Styling: Tailwind CSS & DaisyUI
+
+Authentication: NextAuth.js
+
+Deployment: Vercel
+
+📦 Installation
+Clone the Repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/epiitom/WebReel.git
+cd WebReel
+Install Dependencies:
+
+Using npm:
+
+bash
+Copy
+Edit
+npm install
+Or using yarn:
+
+bash
+Copy
+Edit
+yarn install
+Configure Environment Variables:
+
+Create a .env.local file in the root directory and add the necessary environment variables:
+
+env
+Copy
+Edit
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret
+Note: Replace your_nextauth_secret with a secure secret. Ensure that values are not enclosed in quotes unless necessary.
+
+Run the Development Server:
+
+Using npm:
+
+bash
+Copy
+Edit
 npm run dev
-# or
+Or using yarn:
+
+bash
+Copy
+Edit
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 in your browser to view the application.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🚀 Deployment
+WebReel is deployed on Vercel, which offers seamless integration with GitHub repositories.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To deploy your own version:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Push to GitHub: Ensure your project is committed and pushed to a GitHub repository.
 
-## Learn More
+Import to Vercel:
 
-To learn more about Next.js, take a look at the following resources:
+Navigate to Vercel and sign in.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Click on "New Project" and import your GitHub repository.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Configure the project settings as needed.
 
-## Deploy on Vercel
+Set Environment Variables:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In the Vercel dashboard, go to your project settings and add the necessary environment variables under the "Environment Variables" section.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy: Vercel will automatically build and deploy your project. A unique URL will be generated for your live site.
+
