@@ -49,7 +49,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   if (!ikConfig) {
     return (
-      <SessionProvider refetchInterval={5 * 60}>
+      <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
         <NotificationProvider>
           <div className="text-center py-8">
             <p className="text-red-500">Configuration Error: ImageKit settings are missing</p>
@@ -61,7 +61,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <SessionProvider refetchInterval={5 * 60}>
+    <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
       <NotificationProvider>
         <ImageKitProvider
           publicKey={ikConfig.publicKey}

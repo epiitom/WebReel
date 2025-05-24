@@ -24,10 +24,17 @@ class ApiClient {
       method,
       headers: defaultHeaders,
       body: body ? JSON.stringify(body) : undefined,
+      credentials: "include",
     });
 
     if (!response.ok) {
-      throw new Error(await response.text());
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "An error occurred");
+      } else {
+        throw new Error(await response.text());
+      }
     }
 
     return response.json();

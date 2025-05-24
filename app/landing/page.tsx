@@ -11,21 +11,8 @@ import {
   MessageCircle, 
   ArrowRight 
 } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-export default function Home() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  // Redirect to main app if user is logged in
-  useEffect(() => {
-    if (session) {
-      router.push("/videos");
-    }
-  }, [session, router]);
-
+export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       {/* Hero Section */}
@@ -55,7 +42,7 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
-                href="/videos" 
+                href="/" 
                 className="btn btn-outline btn-lg"
               >
                 Explore Videos
@@ -188,4 +175,4 @@ export default function Home() {
       </section>
     </div>
   );
-}
+} 

@@ -6,6 +6,8 @@ import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload
 import { Loader2 } from "lucide-react";
 import { useNotification } from "./Notification";
 import { apiClient } from "../../lib/api-client";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import FileUpload from "./FileUpload";
 
@@ -20,6 +22,8 @@ export default function VideoUploadForm() {
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const { showNotification } = useNotification();
+  const { data: session } = useSession();
+  const router = useRouter();
 
   const {
     register,
@@ -46,6 +50,12 @@ export default function VideoUploadForm() {
   };
 
   const onSubmit = async (data: VideoFormData) => {
+    if (!session) {
+      showNotification("Please sign in to upload videos", "error");
+      router.push("/login");
+      return;
+    }
+
     if (!data.videoUrl) {
       showNotification("Please upload a video first", "error");
       return;
@@ -63,10 +73,16 @@ export default function VideoUploadForm() {
       setValue("thumbnailUrl", "");
       setUploadProgress(0);
     } catch (error) {
-      showNotification(
-        error instanceof Error ? error.message : "Failed to publish video",
-        "error"
-      );
+      if (error instanceof Error) {
+        if (error.message.includes("Unauthorized")) {
+          showNotification("Please sign in to upload videos", "error");
+          router.push("/login");
+        } else {
+          showNotification(error.message, "error");
+        }
+      } else {
+        showNotification("Failed to publish video", "error");
+      }
     } finally {
       setLoading(false);
     }

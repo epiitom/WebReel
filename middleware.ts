@@ -19,12 +19,12 @@ export default withAuth(
           return true;
         }
 
-        // Public routes
-        if (pathname === "/" || pathname.startsWith("/api/videos")||
-        pathname.startsWith("/api/imagekit-auth") ||
-        pathname.startsWith("/upload")) {
+        // Public routes - homepage and its API calls
+        if (pathname === "/" || 
+            (pathname === "/api/videos" && req.method === "GET")) {
           return true;
         }
+
         // All other routes require authentication
         return !!token;
       },
